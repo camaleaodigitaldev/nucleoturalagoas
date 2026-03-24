@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { MapPin, AtSign, Mail, Phone, Heart } from "lucide-react"
-import { NAV_LINKS, SITE_INSTAGRAM } from "@/lib/constants"
+import { AtSign, Mail, Phone, MapPin, Heart } from "lucide-react"
+import { NAV_LINKS } from "@/lib/constants"
 import { createClient } from "@/lib/supabase/server"
 
-const SERVICES_LINKS = [
+const SEGMENTS = [
   { label: "Hotelaria", href: "/associados?categoria=hotelaria" },
   { label: "Gastronomia", href: "/associados?categoria=gastronomia" },
   { label: "Agências de Turismo", href: "/associados?categoria=agencias" },
@@ -13,12 +13,8 @@ const SERVICES_LINKS = [
 
 export async function Footer() {
   const supabase = await createClient()
-  const { data: settings } = await supabase
-    .from("site_settings")
-    .select("key, value")
-
-  const getSetting = (key: string) =>
-    settings?.find((s) => s.key === key)?.value ?? ""
+  const { data: settings } = await supabase.from("site_settings").select("key, value")
+  const get = (key: string) => settings?.find((s) => s.key === key)?.value ?? ""
 
   const { data: content } = await supabase
     .from("site_content")
@@ -27,47 +23,58 @@ export async function Footer() {
     .single()
 
   const footerDesc =
-    content?.value_text ??
-    "Núcleo de empresas e profissionais do turismo de Alagoas."
+    content?.value_text ?? "Núcleo de empresas e profissionais do turismo de Alagoas."
 
   return (
-    <footer className="bg-slate-900 text-slate-300">
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <footer className="bg-[#071420] text-white/50">
+      {/* Teal top border */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary-600/40 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 mb-4">
-              <MapPin className="size-5 text-secondary-400" />
-              <span className="font-display font-bold text-xl text-white">
-                Núcleo<span className="text-secondary-400">Tur</span>
-                <span className="text-sm font-medium text-primary-400 ml-1.5">Alagoas</span>
-              </span>
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
+              <div className="size-8 rounded-lg bg-primary-600 flex items-center justify-center">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                  <rect x="3" y="3" width="5" height="5" rx="1" fill="white" opacity="0.9"/>
+                  <rect x="10" y="3" width="5" height="5" rx="1" fill="white" opacity="0.6"/>
+                  <rect x="3" y="10" width="5" height="5" rx="1" fill="white" opacity="0.6"/>
+                  <rect x="10" y="10" width="5" height="5" rx="1" fill="white" opacity="0.9"/>
+                </svg>
+              </div>
+              <div className="flex flex-col leading-none gap-0.5">
+                <span className="font-display font-bold text-base text-white tracking-tight">
+                  Núcleo<span className="text-secondary-400">Tur</span>
+                </span>
+                <span className="text-[0.58rem] font-semibold tracking-[0.15em] uppercase text-primary-500">
+                  Alagoas
+                </span>
+              </div>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-400 mb-5">{footerDesc}</p>
-            <div className="flex items-center gap-3">
-              {getSetting("instagram") && (
-                <a
-                  href={`https://instagram.com/${getSetting("instagram")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="size-9 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:bg-primary-700 hover:text-white transition-colors"
-                >
-                  <AtSign className="size-4" />
-                </a>
-              )}
-            </div>
+            <p className="text-sm leading-relaxed text-white/35 mb-5">{footerDesc}</p>
+            {get("instagram") && (
+              <a
+                href={`https://instagram.com/${get("instagram")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center size-9 rounded-lg bg-white/5 text-white/40 hover:bg-primary-600 hover:text-white transition-colors"
+              >
+                <AtSign className="size-4" />
+              </a>
+            )}
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="font-display font-semibold text-white mb-4">Navegação</h3>
+            <h3 className="font-display font-semibold text-white/80 text-sm mb-5">Navegação</h3>
             <ul className="space-y-2.5">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-400 hover:text-primary-400 transition-colors"
+                    className="text-[0.8125rem] text-white/35 hover:text-primary-400 transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -78,13 +85,13 @@ export async function Footer() {
 
           {/* Segments */}
           <div>
-            <h3 className="font-display font-semibold text-white mb-4">Segmentos</h3>
+            <h3 className="font-display font-semibold text-white/80 text-sm mb-5">Segmentos</h3>
             <ul className="space-y-2.5">
-              {SERVICES_LINKS.map((link) => (
+              {SEGMENTS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-400 hover:text-primary-400 transition-colors"
+                    className="text-[0.8125rem] text-white/35 hover:text-primary-400 transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -95,54 +102,49 @@ export async function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-display font-semibold text-white mb-4">Contato</h3>
+            <h3 className="font-display font-semibold text-white/80 text-sm mb-5">Contato</h3>
             <ul className="space-y-3">
-              {getSetting("contact_email") && (
+              {get("contact_email") && (
                 <li className="flex items-start gap-2.5">
-                  <Mail className="size-4 text-primary-400 mt-0.5 shrink-0" />
-                  <a
-                    href={`mailto:${getSetting("contact_email")}`}
-                    className="text-sm text-slate-400 hover:text-primary-400 transition-colors break-all"
-                  >
-                    {getSetting("contact_email")}
+                  <Mail className="size-3.5 text-primary-600 mt-0.5 shrink-0" />
+                  <a href={`mailto:${get("contact_email")}`} className="text-[0.8125rem] text-white/35 hover:text-primary-400 transition-colors break-all">
+                    {get("contact_email")}
                   </a>
                 </li>
               )}
-              {getSetting("contact_phone") && (
+              {get("contact_phone") && (
                 <li className="flex items-start gap-2.5">
-                  <Phone className="size-4 text-primary-400 mt-0.5 shrink-0" />
-                  <a
-                    href={`tel:${getSetting("contact_phone")}`}
-                    className="text-sm text-slate-400 hover:text-primary-400 transition-colors"
-                  >
-                    {getSetting("contact_phone")}
+                  <Phone className="size-3.5 text-primary-600 mt-0.5 shrink-0" />
+                  <a href={`tel:${get("contact_phone")}`} className="text-[0.8125rem] text-white/35 hover:text-primary-400 transition-colors">
+                    {get("contact_phone")}
                   </a>
                 </li>
               )}
-              {getSetting("address") && (
+              {get("address") && (
                 <li className="flex items-start gap-2.5">
-                  <MapPin className="size-4 text-primary-400 mt-0.5 shrink-0" />
-                  <span className="text-sm text-slate-400">{getSetting("address")}</span>
+                  <MapPin className="size-3.5 text-primary-600 mt-0.5 shrink-0" />
+                  <span className="text-[0.8125rem] text-white/35">{get("address")}</span>
                 </li>
               )}
             </ul>
           </div>
+
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-slate-500">
+      {/* Bottom */}
+      <div className="border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-white/20">
             © {new Date().getFullYear()} NúcleoTur Alagoas. Todos os direitos reservados.
           </p>
-          <p className="text-xs text-slate-600 flex items-center gap-1">
-            Feito com <Heart className="size-3 text-primary-500 fill-primary-500" /> pela
+          <p className="text-xs text-white/20 flex items-center gap-1">
+            Feito com <Heart className="size-2.5 text-primary-600 fill-primary-600 mx-0.5" /> pela
             <a
               href="https://camaleaodigital.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary-400 hover:text-primary-300 transition-colors ml-0.5"
+              className="text-primary-600 hover:text-primary-400 transition-colors ml-0.5"
             >
               Camaleão Digital
             </a>

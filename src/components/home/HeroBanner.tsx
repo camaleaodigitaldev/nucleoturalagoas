@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useCallback } from "react"
+import { useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import useEmblaCarousel from "embla-carousel-react"
@@ -9,54 +9,132 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { Banner } from "@/types"
 
+const stats = [
+  { value: "50+", label: "Associados" },
+  { value: "15+", label: "Cidades" },
+  { value: "5+", label: "Anos" },
+]
+
+function HeroFallback() {
+  return (
+    <section className="relative min-h-screen bg-[#071420] flex flex-col justify-center overflow-hidden">
+
+      {/* Subtle grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(14,147,144,1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(14,147,144,1) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Teal glow top-right */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-primary-600/10 blur-[120px] translate-x-1/3 -translate-y-1/4 pointer-events-none" />
+      {/* Amber glow bottom-left */}
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-secondary-500/8 blur-[100px] -translate-x-1/4 translate-y-1/4 pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-28 pb-16 w-full">
+        <div className="max-w-3xl">
+
+          {/* Label */}
+          <div className="flex items-center gap-3 mb-7">
+            <div className="h-px w-8 bg-primary-500" />
+            <span className="text-primary-400 text-xs font-semibold tracking-[0.18em] uppercase">
+              Turismo de Alagoas
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h1 className="font-display font-bold text-white leading-[1.05] mb-6">
+            <span className="block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] tracking-tight">
+              Conectando
+            </span>
+            <span className="block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] tracking-tight text-primary-400">
+              o turismo
+            </span>
+            <span className="block text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] tracking-tight">
+              alagoano
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-white/50 text-lg lg:text-xl leading-relaxed mb-10 max-w-xl">
+            O NúcleoTur Alagoas reúne as melhores empresas e profissionais do setor turístico do estado em um único portal.
+          </p>
+
+          {/* Buttons */}
+          <div className="flex flex-wrap gap-3 mb-16">
+            <Button
+              size="lg"
+              asChild
+              className="bg-secondary-500 hover:bg-secondary-400 text-white font-semibold shadow-none text-sm"
+            >
+              <Link href="/associados">
+                Conheça os Associados
+                <ArrowRight className="size-4 ml-2" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="ghost"
+              asChild
+              className="border border-white/15 text-white/80 hover:text-white hover:bg-white/8 font-medium text-sm"
+            >
+              <Link href="/seja-associado">Seja Associado</Link>
+            </Button>
+          </div>
+
+          {/* Stats strip */}
+          <div className="flex items-center gap-8">
+            {stats.map((s, i) => (
+              <div key={s.label} className="flex items-center gap-8">
+                <div>
+                  <p className="font-display font-bold text-2xl text-white">{s.value}</p>
+                  <p className="text-white/40 text-xs tracking-wide">{s.label}</p>
+                </div>
+                {i < stats.length - 1 && (
+                  <div className="h-8 w-px bg-white/10" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Wave bottom */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
+          <path d="M0 40 C360 80 720 0 1080 40 C1260 60 1380 50 1440 40 L1440 80 L0 80 Z" fill="white"/>
+        </svg>
+      </div>
+    </section>
+  )
+}
+
 interface HeroBannerProps {
   banners: Banner[]
 }
 
 export function HeroBanner({ banners }: HeroBannerProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false }),
+    Autoplay({ delay: 5500, stopOnInteraction: false }),
   ])
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
-  if (banners.length === 0) {
-    return (
-      <section className="relative min-h-screen bg-gradient-to-br from-primary-900 via-primary-700 to-accent-900 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-white">
-          <div className="max-w-2xl">
-            <p className="text-secondary-400 font-semibold text-sm uppercase tracking-wider mb-4">
-              Turismo de Alagoas
-            </p>
-            <h1 className="font-display font-bold text-5xl lg:text-7xl leading-tight mb-6">
-              Conectando o turismo{" "}
-              <span className="text-secondary-400">alagoano</span>
-            </h1>
-            <p className="text-xl text-white/80 mb-8 leading-relaxed">
-              O NúcleoTur Alagoas reúne as melhores empresas e profissionais do turismo do estado.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" asChild className="bg-secondary-500 hover:bg-secondary-600 text-white">
-                <Link href="/associados">Conheça os Associados</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="border-white/30 text-white hover:bg-white/10">
-                <Link href="/seja-associado">Seja Associado</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
+  if (banners.length === 0) return <HeroFallback />
 
   return (
-    <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: 500 }}>
+    <section className="relative overflow-hidden" style={{ height: "100svh", minHeight: 560 }}>
       <div className="overflow-hidden h-full" ref={emblaRef}>
         <div className="flex h-full touch-pan-y">
           {banners.map((banner) => (
             <div key={banner.id} className="relative flex-[0_0_100%] h-full">
-              {/* Background image */}
               <Image
                 src={banner.image_url}
                 alt={banner.title ?? "Banner NúcleoTur"}
@@ -65,23 +143,23 @@ export function HeroBanner({ banners }: HeroBannerProps) {
                 priority
                 sizes="100vw"
               />
-              {/* Overlay */}
-              <div className="absolute inset-0 banner-overlay" />
+              {/* Dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#071420]/85 via-[#071420]/50 to-transparent" />
 
-              {/* Content */}
               <div className="absolute inset-0 flex items-center">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
                   <div className="max-w-2xl text-white">
-                    <p className="text-secondary-400 font-semibold text-sm uppercase tracking-wider mb-4 animate-in slide-in-from-left-4 duration-700">
-                      NúcleoTur Alagoas
-                    </p>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="h-px w-8 bg-primary-400" />
+                      <span className="text-primary-400 text-xs font-semibold tracking-[0.18em] uppercase">NúcleoTur Alagoas</span>
+                    </div>
                     {banner.title && (
-                      <h1 className="font-display font-bold text-4xl lg:text-6xl xl:text-7xl leading-tight mb-4 animate-in slide-in-from-left-4 duration-700 delay-100">
+                      <h1 className="font-display font-bold text-4xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight mb-4">
                         {banner.title}
                       </h1>
                     )}
                     {banner.subtitle && (
-                      <p className="text-xl text-white/80 mb-8 leading-relaxed animate-in slide-in-from-left-4 duration-700 delay-200">
+                      <p className="text-white/70 text-lg leading-relaxed mb-8">
                         {banner.subtitle}
                       </p>
                     )}
@@ -89,7 +167,7 @@ export function HeroBanner({ banners }: HeroBannerProps) {
                       <Button
                         size="lg"
                         asChild
-                        className="bg-secondary-500 hover:bg-secondary-600 text-white animate-in slide-in-from-left-4 duration-700 delay-300"
+                        className="bg-secondary-500 hover:bg-secondary-400 text-white font-semibold shadow-none"
                       >
                         <Link href={banner.cta_url}>
                           {banner.cta_text}
@@ -105,29 +183,27 @@ export function HeroBanner({ banners }: HeroBannerProps) {
         </div>
       </div>
 
-      {/* Navigation arrows */}
       {banners.length > 1 && (
         <>
           <button
             onClick={scrollPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 size-12 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors backdrop-blur-sm"
+            className="absolute left-5 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full bg-black/25 text-white hover:bg-black/50 transition-colors backdrop-blur-sm"
           >
-            <ChevronLeft className="size-6" />
+            <ChevronLeft className="size-5" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 size-12 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors backdrop-blur-sm"
+            className="absolute right-5 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full bg-black/25 text-white hover:bg-black/50 transition-colors backdrop-blur-sm"
           >
-            <ChevronRight className="size-6" />
+            <ChevronRight className="size-5" />
           </button>
         </>
       )}
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/60 animate-bounce">
-        <div className="size-6 border-2 border-white/40 rounded-full flex items-center justify-center">
-          <div className="size-1.5 bg-white/60 rounded-full" />
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
+          <path d="M0 40 C360 80 720 0 1080 40 C1260 60 1380 50 1440 40 L1440 80 L0 80 Z" fill="white"/>
+        </svg>
       </div>
     </section>
   )

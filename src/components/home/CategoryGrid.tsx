@@ -12,61 +12,49 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Grid,
 }
 
-const CATEGORY_BG: Record<string, string> = {
-  hotelaria: "from-blue-500 to-blue-600",
-  gastronomia: "from-orange-500 to-amber-500",
-  agencias: "from-purple-500 to-purple-600",
-  transporte: "from-slate-500 to-slate-600",
-  cultura: "from-pink-500 to-rose-500",
-  ecoturismo: "from-green-500 to-emerald-500",
-  outros: "from-gray-500 to-gray-600",
-}
-
 interface CategoryGridProps {
   categories: Category[]
 }
 
 export function CategoryGrid({ categories }: CategoryGridProps) {
+  if (categories.length === 0) return null
+
   return (
-    <section className="py-20 lg:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-primary-600 font-semibold text-sm uppercase tracking-wider mb-2">
-            Segmentos
-          </p>
-          <h2 className="font-display font-bold text-3xl lg:text-4xl text-slate-900">
-            Explore por categoria
-          </h2>
-          <p className="text-slate-500 mt-3 max-w-xl mx-auto">
-            Encontre exatamente o tipo de serviço turístico que você procura
+    <section className="py-20 lg:py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <div className="section-label mb-4">Segmentos</div>
+            <h2 className="font-display font-bold text-3xl lg:text-4xl text-gray-900 tracking-tight">
+              Explore por categoria
+            </h2>
+          </div>
+          <p className="text-gray-400 text-sm max-w-xs sm:text-right">
+            Serviços turísticos de Alagoas organizados por segmento
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
           {categories.map((cat) => {
             const Icon = ICON_MAP[cat.icon ?? "Grid"] ?? Grid
-            const gradient = CATEGORY_BG[cat.slug] ?? "from-gray-500 to-gray-600"
-
             return (
               <Link
                 key={cat.id}
                 href={`/associados?categoria=${cat.slug}`}
-                className="group flex flex-col items-center gap-3 p-5 rounded-2xl bg-white border border-slate-100 hover:border-primary-200 hover:shadow-md transition-all duration-200 hover:-translate-y-1"
+                className="group flex flex-col items-center gap-3 p-5 rounded-xl bg-white border border-gray-100 hover:border-primary-200 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
               >
-                <div
-                  className={`size-14 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow`}
-                >
-                  <Icon className="size-7 text-white" />
+                <div className="size-12 rounded-xl bg-primary-50 group-hover:bg-primary-100 flex items-center justify-center transition-colors">
+                  <Icon className="size-5 text-primary-600" />
                 </div>
-                <span className="text-xs font-semibold text-slate-700 text-center leading-tight">
+                <span className="text-xs font-semibold text-gray-600 group-hover:text-gray-900 text-center leading-tight transition-colors">
                   {cat.name}
                 </span>
               </Link>
             )
           })}
         </div>
+
       </div>
     </section>
   )

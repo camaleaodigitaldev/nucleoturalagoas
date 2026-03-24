@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Award, Users, Globe } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface InstitutionalBlockProps {
@@ -8,56 +8,56 @@ interface InstitutionalBlockProps {
 }
 
 const stats = [
-  { icon: Users, label: "Empresas Associadas", value: "50+" },
-  { icon: Globe, label: "Cidades Atendidas", value: "15+" },
-  { icon: Award, label: "Anos de Atuação", value: "5+" },
+  { value: "50+", label: "Empresas Associadas", desc: "agências, hotéis e operadoras" },
+  { value: "15+", label: "Cidades Atendidas", desc: "por todo o estado de Alagoas" },
+  { value: "5+", label: "Anos de Atuação", desc: "fortalecendo o setor" },
 ]
 
 export function InstitutionalBlock({ title, text }: InstitutionalBlockProps) {
   return (
     <section className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Text */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+
+        {/* Top: title + text */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-end mb-16 lg:mb-20">
           <div>
-            <p className="text-primary-600 font-semibold text-sm uppercase tracking-wider mb-3">
-              Sobre o NúcleoTur
-            </p>
-            <h2 className="font-display font-bold text-3xl lg:text-4xl xl:text-5xl text-slate-900 leading-tight mb-6">
+            <div className="section-label mb-5">Sobre o NúcleoTur</div>
+            <h2 className="font-display font-bold text-4xl lg:text-5xl text-gray-900 leading-[1.1] tracking-tight">
               {title}
             </h2>
-            <p className="text-slate-600 text-lg leading-relaxed mb-8">{text}</p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild className="bg-primary-600 hover:bg-primary-700">
+          </div>
+          <div>
+            <p className="text-gray-500 text-lg leading-relaxed mb-8">{text}</p>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild className="bg-primary-600 hover:bg-primary-700 text-sm font-semibold">
                 <Link href="/quem-somos">
-                  Conheça nossa história
-                  <ArrowRight className="size-4 ml-2" />
+                  Nossa história
+                  <ArrowRight className="size-3.5 ml-2" />
                 </Link>
               </Button>
-              <Button variant="outline" asChild>
+              <Button variant="outline" asChild className="text-sm">
                 <Link href="/associados">Ver Associados</Link>
               </Button>
             </div>
           </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex items-center gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary-200 hover:bg-primary-50/30 transition-colors"
-              >
-                <div className="size-12 rounded-xl bg-primary-100 flex items-center justify-center shrink-0">
-                  <stat.icon className="size-6 text-primary-600" />
-                </div>
-                <div>
-                  <p className="font-display font-bold text-2xl text-slate-900">{stat.value}</p>
-                  <p className="text-sm text-slate-500">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-gray-100 rounded-2xl overflow-hidden">
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`p-8 lg:p-10 ${i < stats.length - 1 ? "border-b sm:border-b-0 sm:border-r border-gray-100" : ""}`}
+            >
+              <p className="font-display font-bold text-5xl text-primary-600 tracking-tight mb-2">
+                {s.value}
+              </p>
+              <p className="font-semibold text-gray-900 text-sm mb-1">{s.label}</p>
+              <p className="text-gray-400 text-xs">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   )
