@@ -17,7 +17,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- ── profiles ──────────────────────────────────────────────────────────────
-CREATE TABLE public.profiles (
+CREATE TABLE IF NOT EXISTS public.profiles (
   id         UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   role       TEXT NOT NULL DEFAULT 'associado'
                CHECK (role IN ('super_admin', 'associado')),
@@ -25,6 +25,7 @@ CREATE TABLE public.profiles (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+DROP TRIGGER IF EXISTS profiles_updated_at ON public.profiles;
 CREATE TRIGGER profiles_updated_at
   BEFORE UPDATE ON public.profiles
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
@@ -37,11 +38,13 @@ BEGIN
   VALUES (
     NEW.id,
     COALESCE(NEW.raw_user_meta_data->>'role', 'associado')
-  );
+  )
+  ON CONFLICT (id) DO NOTHING;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
@@ -56,7 +59,7 @@ RETURNS BOOLEAN AS $$
 $$ LANGUAGE sql SECURITY DEFINER STABLE;
 
 -- ── categories ────────────────────────────────────────────────────────────
-CREATE TABLE public.categories (
+CREATE TABLE IF NOT EXISTS public.categories (
   id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name       TEXT NOT NULL,
   slug       TEXT NOT NULL UNIQUE,
@@ -66,14 +69,14 @@ CREATE TABLE public.categories (
 );
 
 -- ── cities ────────────────────────────────────────────────────────────────
-CREATE TABLE public.cities (
+CREATE TABLE IF NOT EXISTS public.cities (
   id   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL UNIQUE,
   slug TEXT NOT NULL UNIQUE
 );
 
 -- ── associados ────────────────────────────────────────────────────────────
-CREATE TABLE public.associados (
+CREATE TABLE IF NOT EXISTS public.associados (
   id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id          UUID UNIQUE REFERENCES public.profiles(id) ON DELETE SET NULL,
   slug             TEXT NOT NULL UNIQUE,
@@ -97,28 +100,29 @@ CREATE TABLE public.associados (
   updated_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX associados_status_idx    ON public.associados(status);
-CREATE INDEX associados_category_idx  ON public.associados(category_id);
-CREATE INDEX associados_city_idx      ON public.associados(city_id);
-CREATE INDEX associados_featured_idx  ON public.associados(featured);
-CREATE INDEX associados_slug_idx      ON public.associados(slug);
+CREATE INDEX IF NOT EXISTS associados_status_idx    ON public.associados(status);
+CREATE INDEX IF NOT EXISTS associados_category_idx  ON public.associados(category_id);
+CREATE INDEX IF NOT EXISTS associados_city_idx      ON public.associados(city_id);
+CREATE INDEX IF NOT EXISTS associados_featured_idx  ON public.associados(featured);
+CREATE INDEX IF NOT EXISTS associados_slug_idx      ON public.associados(slug);
 
+DROP TRIGGER IF EXISTS associados_updated_at ON public.associados;
 CREATE TRIGGER associados_updated_at
   BEFORE UPDATE ON public.associados
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- ── associado_services ────────────────────────────────────────────────────
-CREATE TABLE public.associado_services (
+CREATE TABLE IF NOT EXISTS public.associado_services (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   associado_id  UUID NOT NULL REFERENCES public.associados(id) ON DELETE CASCADE,
   name          TEXT NOT NULL,
   sort_order    INT  NOT NULL DEFAULT 0
 );
 
-CREATE INDEX assoc_services_assoc_idx ON public.associado_services(associado_id);
+CREATE INDEX IF NOT EXISTS assoc_services_assoc_idx ON public.associado_services(associado_id);
 
 -- ── associado_photos ──────────────────────────────────────────────────────
-CREATE TABLE public.associado_photos (
+CREATE TABLE IF NOT EXISTS public.associado_photos (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   associado_id  UUID NOT NULL REFERENCES public.associados(id) ON DELETE CASCADE,
   url           TEXT NOT NULL,
@@ -127,10 +131,10 @@ CREATE TABLE public.associado_photos (
   created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX assoc_photos_assoc_idx ON public.associado_photos(associado_id);
+CREATE INDEX IF NOT EXISTS assoc_photos_assoc_idx ON public.associado_photos(associado_id);
 
 -- ── noticias ──────────────────────────────────────────────────────────────
-CREATE TABLE public.noticias (
+CREATE TABLE IF NOT EXISTS public.noticias (
   id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   slug         TEXT NOT NULL UNIQUE,
   title        TEXT NOT NULL,
@@ -145,16 +149,17 @@ CREATE TABLE public.noticias (
   updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX noticias_published_idx ON public.noticias(published);
-CREATE INDEX noticias_featured_idx  ON public.noticias(featured);
-CREATE INDEX noticias_published_at_idx ON public.noticias(published_at DESC);
+CREATE INDEX IF NOT EXISTS noticias_published_idx    ON public.noticias(published);
+CREATE INDEX IF NOT EXISTS noticias_featured_idx     ON public.noticias(featured);
+CREATE INDEX IF NOT EXISTS noticias_published_at_idx ON public.noticias(published_at DESC);
 
+DROP TRIGGER IF EXISTS noticias_updated_at ON public.noticias;
 CREATE TRIGGER noticias_updated_at
   BEFORE UPDATE ON public.noticias
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- ── eventos ───────────────────────────────────────────────────────────────
-CREATE TABLE public.eventos (
+CREATE TABLE IF NOT EXISTS public.eventos (
   id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   slug         TEXT NOT NULL UNIQUE,
   title        TEXT NOT NULL,
@@ -172,15 +177,16 @@ CREATE TABLE public.eventos (
   updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX eventos_published_idx  ON public.eventos(published);
-CREATE INDEX eventos_start_date_idx ON public.eventos(start_date);
+CREATE INDEX IF NOT EXISTS eventos_published_idx  ON public.eventos(published);
+CREATE INDEX IF NOT EXISTS eventos_start_date_idx ON public.eventos(start_date);
 
+DROP TRIGGER IF EXISTS eventos_updated_at ON public.eventos;
 CREATE TRIGGER eventos_updated_at
   BEFORE UPDATE ON public.eventos
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- ── banners ───────────────────────────────────────────────────────────────
-CREATE TABLE public.banners (
+CREATE TABLE IF NOT EXISTS public.banners (
   id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title      TEXT,
   subtitle   TEXT,
@@ -193,7 +199,7 @@ CREATE TABLE public.banners (
 );
 
 -- ── site_content ──────────────────────────────────────────────────────────
-CREATE TABLE public.site_content (
+CREATE TABLE IF NOT EXISTS public.site_content (
   key        TEXT PRIMARY KEY,
   value_text TEXT,
   value_html TEXT,
@@ -202,13 +208,13 @@ CREATE TABLE public.site_content (
 );
 
 -- ── site_settings ─────────────────────────────────────────────────────────
-CREATE TABLE public.site_settings (
+CREATE TABLE IF NOT EXISTS public.site_settings (
   key   TEXT PRIMARY KEY,
   value TEXT
 );
 
 -- ── seja_associado_leads ──────────────────────────────────────────────────
-CREATE TABLE public.seja_associado_leads (
+CREATE TABLE IF NOT EXISTS public.seja_associado_leads (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name        TEXT NOT NULL,
   email       TEXT NOT NULL,
@@ -222,7 +228,7 @@ CREATE TABLE public.seja_associado_leads (
 );
 
 -- ── contact_messages ──────────────────────────────────────────────────────
-CREATE TABLE public.contact_messages (
+CREATE TABLE IF NOT EXISTS public.contact_messages (
   id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name       TEXT NOT NULL,
   email      TEXT NOT NULL,
