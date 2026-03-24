@@ -6,36 +6,45 @@
   --font-sans: var(--font-inter);
   --font-display: var(--font-sora);
 
-  /* Brand — Primary Teal */
-  --color-primary-50:  #EDFAFA;
-  --color-primary-100: #D5F5F6;
-  --color-primary-200: #AFECEF;
-  --color-primary-300: #7EDCE2;
-  --color-primary-400: #16BDCA;
-  --color-primary-500: #0AAFAB;
-  --color-primary-600: #0E9390;
-  --color-primary-700: #0B7B78;
-  --color-primary-800: #0D6160;
-  --color-primary-900: #0A4F4F;
-  --color-primary-950: #072F2F;
+  /* Brand — Primary Blue (linhas geométricas da marca) */
+  --color-primary-50:  #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-200: #BFDBFE;
+  --color-primary-300: #93C5FD;
+  --color-primary-400: #60A5FA;
+  --color-primary-500: #3B82F6;
+  --color-primary-600: #1B72C8;
+  --color-primary-700: #1558A0;
+  --color-primary-800: #10437C;
+  --color-primary-900: #0D2F5A;
+  --color-primary-950: #071828;
 
-  /* Brand — Amber Gold */
+  /* Brand — Gold/Amarelo (círculo solar) */
   --color-secondary-50:  #FFFBEB;
   --color-secondary-100: #FEF3C7;
   --color-secondary-200: #FDE68A;
   --color-secondary-300: #FCD34D;
   --color-secondary-400: #FBBF24;
-  --color-secondary-500: #F59E0B;
+  --color-secondary-500: #F5B80E;
   --color-secondary-600: #D97706;
   --color-secondary-700: #B45309;
   --color-secondary-800: #92400E;
   --color-secondary-900: #78350F;
 
-  /* Brand — Deep Navy */
-  --color-navy-900: #071420;
-  --color-navy-800: #0C1E30;
-  --color-navy-700: #112840;
-  --color-navy-600: #1A3550;
+  /* Brand — Teal/Ciano (ondas) */
+  --color-teal-300: #67E8F9;
+  --color-teal-400: #22D3EE;
+  --color-teal-500: #00BEC7;
+  --color-teal-600: #0097A7;
+
+  /* Brand — Red (centro geométrico) */
+  --color-brand-red: #D63230;
+
+  /* Deep Navy (hero, footer) */
+  --color-navy-900: #050E1A;
+  --color-navy-800: #081422;
+  --color-navy-700: #0C1D30;
+  --color-navy-600: #132540;
 
   /* shadcn/ui semantic */
   --color-background:           var(--background);
@@ -71,8 +80,8 @@
   --card-foreground: #0A1628;
   --popover:       #ffffff;
   --popover-foreground: #0A1628;
-  --primary:           #0E9390;
-  --primary-foreground: #EDFAFA;
+  --primary:           #1B72C8;
+  --primary-foreground: #EFF6FF;
   --secondary:           #F3F4F6;
   --secondary-foreground: #0A1628;
   --muted:           #F9FAFB;
@@ -83,11 +92,10 @@
   --destructive-foreground: #FEF2F2;
   --border: #E5E7EB;
   --input:  #E5E7EB;
-  --ring:   #0E9390;
+  --ring:   #1B72C8;
 }
 
 * { border-color: var(--border); }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -104,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .prose {
   --tw-prose-headings: #0A1628;
-  --tw-prose-links: #0E9390;
+  --tw-prose-links: #1B72C8;
   --tw-prose-bold: #0A1628;
 }
 
@@ -115,10 +123,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-transition { transition: width 200ms ease, transform 200ms ease; }
 .aspect-card-cover { aspect-ratio: 16 / 9; }
-
 :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
-/* Section label with leading line */
+/* Section label with teal leading line (brand teal from waves) */
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -127,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #0E9390;
+  color: #00BEC7;
 }
 .section-label::before {
   content: '';

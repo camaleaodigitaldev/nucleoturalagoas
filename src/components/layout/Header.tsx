@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -29,7 +30,7 @@ export function Header() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         transparent
           ? "bg-transparent"
-          : "bg-white/96 backdrop-blur-md border-b border-gray-100 shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+          : "bg-white/97 backdrop-blur-md border-b border-gray-100 shadow-[0_1px_4px_rgba(0,0,0,0.07)]"
       )}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
@@ -37,17 +38,14 @@ export function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className={cn(
-              "size-8 rounded-lg flex items-center justify-center transition-colors duration-300",
-              transparent ? "bg-white/15" : "bg-primary-600"
-            )}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="3" y="3" width="5" height="5" rx="1" fill="white" opacity="0.9"/>
-                <rect x="10" y="3" width="5" height="5" rx="1" fill="white" opacity="0.6"/>
-                <rect x="3" y="10" width="5" height="5" rx="1" fill="white" opacity="0.6"/>
-                <rect x="10" y="10" width="5" height="5" rx="1" fill="white" opacity="0.9"/>
-              </svg>
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="NúcleoTur Alagoas"
+              width={40}
+              height={40}
+              className="rounded-lg object-cover"
+              priority
+            />
             <div className="flex flex-col leading-none gap-0.5">
               <span className={cn(
                 "font-display font-bold text-[1.05rem] tracking-tight leading-none transition-colors duration-300",
@@ -112,17 +110,16 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] p-0 bg-white">
                 <SheetHeader className="px-6 pt-6 pb-4 border-b border-gray-100">
-                  <SheetTitle className="flex items-center gap-2 font-display font-bold text-[0.95rem] text-gray-900">
-                    <div className="size-7 rounded-md bg-primary-600 flex items-center justify-center">
-                      <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
-                        <rect x="3" y="3" width="5" height="5" rx="1" fill="white" opacity="0.9"/>
-                        <rect x="10" y="3" width="5" height="5" rx="1" fill="white" opacity="0.6"/>
-                        <rect x="3" y="10" width="5" height="5" rx="1" fill="white" opacity="0.6"/>
-                        <rect x="10" y="10" width="5" height="5" rx="1" fill="white" opacity="0.9"/>
-                      </svg>
-                    </div>
+                  <SheetTitle className="flex items-center gap-2.5 font-display font-bold text-[0.95rem] text-gray-900">
+                    <Image
+                      src="/logo.jpg"
+                      alt="NúcleoTur Alagoas"
+                      width={32}
+                      height={32}
+                      className="rounded-md object-cover"
+                    />
                     Núcleo<span className="text-secondary-500">Tur</span>
-                    <span className="text-[0.7rem] font-medium text-primary-600 ml-0.5">Alagoas</span>
+                    <span className="text-[0.65rem] font-semibold text-primary-600 tracking-wider uppercase">Alagoas</span>
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col px-3 py-4 gap-0.5">
