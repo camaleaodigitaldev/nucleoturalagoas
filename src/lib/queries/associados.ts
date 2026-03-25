@@ -68,6 +68,18 @@ export async function getAssociados(
   }
 }
 
+export async function getAllActiveAssociados(): Promise<AssociadoWithRelations[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from("associados")
+    .select(ASSOC_SELECT)
+    .eq("status", "active")
+    .order("sort_order", { ascending: true })
+    .order("name", { ascending: true })
+
+  return (data ?? []) as unknown as AssociadoWithRelations[]
+}
+
 export async function getFeaturedAssociados(limit = 6): Promise<AssociadoWithRelations[]> {
   const supabase = await createClient()
   const { data } = await supabase

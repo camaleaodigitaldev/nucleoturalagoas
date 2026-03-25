@@ -8,7 +8,7 @@ import { CTABlock } from "@/components/home/CTABlock"
 import { getActiveBanners } from "@/lib/queries/banners"
 import { getSiteContent } from "@/lib/queries/site-content"
 import { getCategories } from "@/lib/queries/categories"
-import { getFeaturedAssociados } from "@/lib/queries/associados"
+import { getAllActiveAssociados } from "@/lib/queries/associados"
 import { getLatestNoticias } from "@/lib/queries/noticias"
 import { getUpcomingEventos } from "@/lib/queries/eventos"
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants"
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [banners, content, categories, featured, noticias, eventos] = await Promise.all([
+  const [banners, content, categories, allAssociados, noticias, eventos] = await Promise.all([
     getActiveBanners(),
     getSiteContent([
       "home_institucional_title",
@@ -30,7 +30,7 @@ export default async function HomePage() {
       "home_cta_text",
     ]),
     getCategories(),
-    getFeaturedAssociados(18),
+    getAllActiveAssociados(),
     getLatestNoticias(3),
     getUpcomingEventos(4),
   ])
@@ -41,7 +41,7 @@ export default async function HomePage() {
       <InstitutionalBlock
         title={content["home_institucional_title"]?.value_text ?? "Fortalecendo o Turismo de Alagoas"}
         text={content["home_institucional_text"]?.value_text ?? "O NúcleoTur Alagoas reúne as melhores empresas e profissionais do setor turístico alagoano."}
-        associados={featured}
+        associados={allAssociados}
       />
       <CategoryGrid categories={categories} />
       <LatestNews noticias={noticias} />
