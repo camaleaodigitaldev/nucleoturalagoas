@@ -10,12 +10,6 @@ import { Button } from "@/components/ui/button"
 import { HERO_YOUTUBE_ID } from "@/lib/constants"
 import type { Banner } from "@/types"
 
-const stats = [
-  { value: "50+", label: "Associados" },
-  { value: "15+", label: "Cidades" },
-  { value: "5+", label: "Anos" },
-]
-
 function YoutubeEmbed({ videoId }: { videoId: string }) {
   if (!videoId) {
     return (
@@ -113,20 +107,6 @@ function HeroFallback() {
               </Button>
             </div>
 
-            {/* Stats */}
-            <div className="flex items-center gap-8">
-              {stats.map((s, i) => (
-                <div key={s.label} className="flex items-center gap-8">
-                  <div>
-                    <p className="font-display font-bold text-2xl text-white">{s.value}</p>
-                    <p className="text-white/40 text-xs tracking-wide mt-0.5">{s.label}</p>
-                  </div>
-                  {i < stats.length - 1 && (
-                    <div className="h-8 w-px bg-white/15" />
-                  )}
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Direita: vídeo */}

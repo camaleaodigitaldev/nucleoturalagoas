@@ -10,11 +10,6 @@ interface InstitutionalBlockProps {
   associados: AssociadoWithRelations[]
 }
 
-const stats = [
-  { value: "50+", label: "Empresas Associadas", desc: "agências, hotéis e operadoras" },
-  { value: "15+", label: "Cidades Atendidas", desc: "por todo o estado de Alagoas" },
-  { value: "5+", label: "Anos de Atuação", desc: "fortalecendo o setor" },
-]
 
 function LogoCard({ a }: { a: AssociadoWithRelations }) {
   return (
@@ -116,20 +111,6 @@ export function InstitutionalBlock({ title, text, associados }: InstitutionalBlo
               </Button>
             </div>
           </div>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 bg-white border border-primary-100 rounded-2xl overflow-hidden shadow-sm shadow-primary-50 mb-16 lg:mb-20">
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className={`p-8 lg:p-10 ${i < stats.length - 1 ? "border-b sm:border-b-0 sm:border-r border-gray-100" : ""}`}
-            >
-              <p className="font-display font-bold text-5xl text-primary-600 tracking-tight mb-2">{s.value}</p>
-              <p className="font-semibold text-gray-900 text-sm mb-1">{s.label}</p>
-              <p className="text-gray-400 text-xs">{s.desc}</p>
-            </div>
-          ))}
         </div>
 
       </div>
