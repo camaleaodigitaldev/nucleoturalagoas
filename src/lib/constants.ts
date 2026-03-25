@@ -1,7 +1,7 @@
 export const SITE_NAME = "NúcleoTur Alagoas"
 
 // Hero YouTube video ID — paste only the ID (e.g. "dQw4w9WgXcQ" from youtu.be/dQw4w9WgXcQ)
-export const HERO_YOUTUBE_ID = "" // ← cole aqui o ID do vídeo
+export const HERO_YOUTUBE_ID = "01Sb2nUDOr0"
 export const SITE_DESCRIPTION =
   "Núcleo de empresas e profissionais do turismo do estado de Alagoas. Conectamos, fortalecemos e damos visibilidade ao setor turístico alagoano."
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nucleoturalagoas.com.br"
