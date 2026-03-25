@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { HeroBanner } from "@/components/home/HeroBanner"
 import { InstitutionalBlock } from "@/components/home/InstitutionalBlock"
 import { CategoryGrid } from "@/components/home/CategoryGrid"
-import { PartnersMarquee } from "@/components/home/PartnersMarquee"
 import { LatestNews } from "@/components/home/LatestNews"
 import { UpcomingEvents } from "@/components/home/UpcomingEvents"
 import { CTABlock } from "@/components/home/CTABlock"
@@ -42,9 +41,9 @@ export default async function HomePage() {
       <InstitutionalBlock
         title={content["home_institucional_title"]?.value_text ?? "Fortalecendo o Turismo de Alagoas"}
         text={content["home_institucional_text"]?.value_text ?? "O NúcleoTur Alagoas reúne as melhores empresas e profissionais do setor turístico alagoano."}
+        associados={featured}
       />
       <CategoryGrid categories={categories} />
-      <PartnersMarquee associados={featured} />
       <LatestNews noticias={noticias} />
       <UpcomingEvents eventos={eventos} />
       <CTABlock
