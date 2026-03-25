@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter, Sora } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
+import { SplashScreen } from "@/components/layout/SplashScreen"
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants"
 
 const inter = Inter({
@@ -63,6 +64,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} ${sora.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground antialiased">
+        <SplashScreen />
         {children}
         <Toaster richColors position="top-right" />
       </body>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu } from "lucide-react"
+import { Menu, LogIn } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { NAV_LINKS } from "@/lib/constants"
@@ -72,7 +72,23 @@ export function Header() {
           </nav>
 
           {/* CTA + Mobile */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Button
+              asChild
+              size="sm"
+              variant="ghost"
+              className={cn(
+                "hidden lg:inline-flex text-[0.8125rem] font-medium gap-1.5",
+                transparent
+                  ? "text-white/80 hover:text-white hover:bg-white/10"
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+              )}
+            >
+              <Link href="/login">
+                <LogIn className="size-3.5" />
+                Entrar
+              </Link>
+            </Button>
             <Button
               asChild
               size="sm"
@@ -122,7 +138,13 @@ export function Header() {
                     </Link>
                   ))}
                 </nav>
-                <div className="px-4 pb-6">
+                <div className="px-4 pb-6 flex flex-col gap-2">
+                  <Button asChild variant="outline" className="w-full font-medium gap-2">
+                    <Link href="/login" onClick={() => setOpen(false)}>
+                      <LogIn className="size-4" />
+                      Entrar
+                    </Link>
+                  </Button>
                   <Button asChild className="w-full bg-secondary-500 hover:bg-secondary-400 text-white font-semibold">
                     <Link href="/seja-associado" onClick={() => setOpen(false)}>Seja Associado</Link>
                   </Button>

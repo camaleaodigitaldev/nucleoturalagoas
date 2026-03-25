@@ -8,10 +8,10 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nucleotural
 export const SITE_INSTAGRAM = "https://www.instagram.com/nucleoturalagoas/"
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
+  { label: "Início", href: "/" },
   { label: "Quem Somos", href: "/quem-somos" },
   { label: "Associados", href: "/associados" },
-  { label: "Calendário", href: "/calendario" },
+  { label: "Encontros", href: "/calendario" },
   { label: "Notícias", href: "/noticias" },
   { label: "Eventos", href: "/eventos" },
   { label: "Contato", href: "/contato" },
