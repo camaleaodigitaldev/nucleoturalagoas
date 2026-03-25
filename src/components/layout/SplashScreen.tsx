@@ -39,7 +39,7 @@ export function SplashScreen() {
         muted
         playsInline
         onEnded={dismiss}
-        className="max-w-xs w-full"
+        className="w-[480px] max-w-[80vw]"
         style={{ mixBlendMode: "multiply" }}
       />
     </div>
