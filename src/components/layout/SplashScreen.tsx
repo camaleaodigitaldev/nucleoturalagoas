@@ -29,8 +29,15 @@ export function SplashScreen() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] bg-white transition-opacity duration-600"
-      style={{ opacity: fading ? 0 : 1, pointerEvents: fading ? "none" : "auto" }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        backgroundColor: "white",
+        opacity: fading ? 0 : 1,
+        pointerEvents: fading ? "none" : "auto",
+        transition: "opacity 0.6s ease",
+      }}
     >
       <video
         ref={videoRef}
@@ -39,8 +46,14 @@ export function SplashScreen() {
         muted
         playsInline
         onEnded={dismiss}
-        className="w-full h-full object-cover"
-        style={{ mixBlendMode: "multiply" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          mixBlendMode: "multiply",
+        }}
       />
     </div>
   )
