@@ -36,14 +36,15 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-[4.5rem]">
 
-          {/* Logo — imagem apenas */}
+          {/* Logo — branca no topo, colorida ao rolar */}
           <Link href="/" className="shrink-0 flex items-center">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="NúcleoTur Alagoas"
-              width={46}
-              height={46}
-              className="rounded-xl object-cover"
+              width={48}
+              height={48}
+              className="object-contain transition-all duration-500"
+              style={{ filter: transparent ? "brightness(0) invert(1)" : "none" }}
               priority
             />
           </Link>
@@ -97,7 +98,7 @@ export function Header() {
               <SheetContent side="right" className="w-[280px] p-0 bg-white">
                 <SheetHeader className="px-6 pt-6 pb-4 border-b border-gray-100">
                   <SheetTitle className="flex items-center gap-2.5">
-                    <Image src="/logo.jpg" alt="NúcleoTur Alagoas" width={34} height={34} className="rounded-lg object-cover" />
+                    <Image src="/logo.png" alt="NúcleoTur Alagoas" width={36} height={36} className="object-contain" />
                     <span className="font-display font-bold text-[0.95rem] text-gray-900">
                       Núcleo<span className="text-secondary-500">Tur</span>{" "}
                       <span className="text-primary-600">Alagoas</span>
