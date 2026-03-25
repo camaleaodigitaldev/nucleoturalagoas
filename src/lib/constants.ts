@@ -11,9 +11,9 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Quem Somos", href: "/quem-somos" },
   { label: "Associados", href: "/associados" },
+  { label: "Calendário", href: "/calendario" },
   { label: "Notícias", href: "/noticias" },
   { label: "Eventos", href: "/eventos" },
-  { label: "Seja Associado", href: "/seja-associado" },
   { label: "Contato", href: "/contato" },
 ] as const
 

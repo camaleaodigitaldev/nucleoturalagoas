@@ -5,7 +5,6 @@ import { CategoryGrid } from "@/components/home/CategoryGrid"
 import { LatestNews } from "@/components/home/LatestNews"
 import { UpcomingEvents } from "@/components/home/UpcomingEvents"
 import { CTABlock } from "@/components/home/CTABlock"
-import { MeetingsCalendar } from "@/components/home/MeetingsCalendar"
 import { getActiveBanners } from "@/lib/queries/banners"
 import { getSiteContent } from "@/lib/queries/site-content"
 import { getCategories } from "@/lib/queries/categories"
@@ -45,7 +44,6 @@ export default async function HomePage() {
         associados={featured}
       />
       <CategoryGrid categories={categories} />
-      <MeetingsCalendar />
       <LatestNews noticias={noticias} />
       <UpcomingEvents eventos={eventos} />
       <CTABlock
