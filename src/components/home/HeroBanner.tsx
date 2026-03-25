@@ -72,7 +72,7 @@ function HeroFallback() {
             <div className="flex items-center gap-3 mb-7">
               <div className="h-px w-7 bg-white/50" />
               <span className="text-white/70 text-xs font-semibold tracking-[0.16em] uppercase">
-                Portal do Turismo Alagoano
+                Núcleo de Turismo de Alagoas
               </span>
             </div>
 
