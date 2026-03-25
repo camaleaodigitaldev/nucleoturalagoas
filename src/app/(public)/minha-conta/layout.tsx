@@ -28,7 +28,7 @@ export default async function MinhaContaLayout({
   if (!profile) redirect("/login")
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 pt-20 lg:pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid lg:grid-cols-[240px_1fr] gap-8">
           {/* Sidebar */}
