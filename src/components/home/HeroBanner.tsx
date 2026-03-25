@@ -42,7 +42,7 @@ function HeroFallback() {
     <section
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #0F4C8A 0%, #1B72C8 45%, #2B8FE0 80%, #3BA8F5 100%)",
+        background: "linear-gradient(145deg, #062152 0%, #0C3D82 20%, #1558A0 40%, #1B72C8 60%, #2E94E8 80%, #50BAFF 100%)",
       }}
     >
       {/* Brilho sutil superior direito */}
