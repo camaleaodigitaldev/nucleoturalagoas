@@ -40,6 +40,7 @@ export function SplashScreen() {
         playsInline
         onEnded={dismiss}
         className="max-w-xs w-full"
+        style={{ mixBlendMode: "multiply" }}
       />
     </div>
   )
