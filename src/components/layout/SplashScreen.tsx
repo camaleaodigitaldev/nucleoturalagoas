@@ -29,7 +29,7 @@ export function SplashScreen() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-600"
+      className="fixed inset-0 z-[9999] bg-white transition-opacity duration-600"
       style={{ opacity: fading ? 0 : 1, pointerEvents: fading ? "none" : "auto" }}
     >
       <video
@@ -39,7 +39,7 @@ export function SplashScreen() {
         muted
         playsInline
         onEnded={dismiss}
-        className="w-[480px] max-w-[80vw]"
+        className="w-full h-full object-cover"
         style={{ mixBlendMode: "multiply" }}
       />
     </div>
