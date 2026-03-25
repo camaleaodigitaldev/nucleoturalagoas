@@ -88,8 +88,8 @@ function HeroFallback() {
               </span>
             </h1>
 
-            <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-[420px]">
-              Reunimos as melhores empresas e profissionais do turismo de Alagoas em um único portal.
+            <p className="text-white/70 text-xl font-medium leading-relaxed mb-10 max-w-[420px] tracking-wide">
+              Conectando agentes, fortalecendo destinos.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-14">
