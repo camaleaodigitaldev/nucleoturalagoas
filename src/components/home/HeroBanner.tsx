@@ -19,13 +19,13 @@ const stats = [
 function YoutubeEmbed({ videoId }: { videoId: string }) {
   if (!videoId) {
     return (
-      <div className="w-full aspect-video rounded-2xl bg-primary-50 border-2 border-primary-100 flex items-center justify-center">
-        <p className="text-primary-300 text-sm">Vídeo em breve</p>
+      <div className="w-full aspect-video rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center">
+        <p className="text-white/40 text-sm">Vídeo em breve</p>
       </div>
     )
   }
   return (
-    <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-xl shadow-primary-900/10 ring-1 ring-primary-100">
+    <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/20 ring-1 ring-white/20">
       <iframe
         src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0`}
         title="NúcleoTur Alagoas"
@@ -42,18 +42,26 @@ function HeroFallback() {
     <section
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
       style={{
-        background: "linear-gradient(160deg, #EBF5FF 0%, #F5F9FF 45%, #FFFDF7 100%)",
+        background: "linear-gradient(135deg, #0F4C8A 0%, #1B72C8 45%, #2B8FE0 80%, #3BA8F5 100%)",
       }}
     >
-      {/* Decoração: círculo azul grande desfocado no canto superior direito */}
+      {/* Brilho sutil superior direito */}
       <div
-        className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #BFDBFE 0%, transparent 70%)" }}
+        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full translate-x-1/3 -translate-y-1/4 pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)" }}
       />
-      {/* Círculo creme quente no canto inferior esquerdo */}
+      {/* Brilho inferior esquerdo */}
       <div
-        className="absolute bottom-0 left-0 w-[500px] h-[400px] rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #FEF3C7 0%, transparent 70%)" }}
+        className="absolute bottom-0 left-0 w-[500px] h-[400px] rounded-full -translate-x-1/4 translate-y-1/3 pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%)" }}
+      />
+      {/* Dot grid sutil */}
+      <div
+        className="absolute inset-0 opacity-[0.06] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+          backgroundSize: "36px 36px",
+        }}
       />
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-28 pb-20 w-full">
@@ -62,25 +70,25 @@ function HeroFallback() {
           {/* Esquerda: texto */}
           <div>
             <div className="flex items-center gap-3 mb-7">
-              <div className="h-px w-7 bg-primary-400" />
-              <span className="text-primary-500 text-xs font-semibold tracking-[0.16em] uppercase">
+              <div className="h-px w-7 bg-white/50" />
+              <span className="text-white/70 text-xs font-semibold tracking-[0.16em] uppercase">
                 Portal do Turismo Alagoano
               </span>
             </div>
 
             <h1 className="font-display font-bold leading-[1.05] mb-6">
-              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-gray-900">
+              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-white">
                 Conectando
               </span>
-              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-primary-600">
+              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-secondary-300">
                 o turismo
               </span>
-              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-gray-900">
+              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-white">
                 alagoano
               </span>
             </h1>
 
-            <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-[420px]">
+            <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-[420px]">
               Reunimos as melhores empresas e profissionais do turismo de Alagoas em um único portal.
             </p>
 
@@ -88,18 +96,18 @@ function HeroFallback() {
               <Button
                 size="lg"
                 asChild
-                className="bg-primary-600 hover:bg-primary-700 text-white font-semibold shadow-lg shadow-primary-200 text-sm"
+                className="bg-secondary-500 hover:bg-secondary-400 text-white font-semibold shadow-lg shadow-black/20 text-sm"
               >
-                <Link href="/associados">
-                  Conheça os Associados
+                <Link href="/quem-somos">
+                  Conheça o Núcleo
                   <ArrowRight className="size-4 ml-2" />
                 </Link>
               </Button>
               <Button
                 size="lg"
-                variant="outline"
+                variant="ghost"
                 asChild
-                className="border-primary-200 text-primary-700 hover:bg-primary-50 text-sm"
+                className="border border-white/30 text-white hover:bg-white/10 text-sm"
               >
                 <Link href="/seja-associado">Seja Associado</Link>
               </Button>
@@ -110,11 +118,11 @@ function HeroFallback() {
               {stats.map((s, i) => (
                 <div key={s.label} className="flex items-center gap-8">
                   <div>
-                    <p className="font-display font-bold text-2xl text-primary-600">{s.value}</p>
-                    <p className="text-gray-400 text-xs tracking-wide mt-0.5">{s.label}</p>
+                    <p className="font-display font-bold text-2xl text-white">{s.value}</p>
+                    <p className="text-white/40 text-xs tracking-wide mt-0.5">{s.label}</p>
                   </div>
                   {i < stats.length - 1 && (
-                    <div className="h-8 w-px bg-gray-200" />
+                    <div className="h-8 w-px bg-white/15" />
                   )}
                 </div>
               ))}
@@ -129,10 +137,10 @@ function HeroFallback() {
         </div>
       </div>
 
-      {/* Linha de onda teal na base (referência marca) */}
+      {/* Onda de transição para branco */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
-          <path d="M0 30 C360 60 720 0 1080 30 C1260 45 1380 38 1440 30 L1440 60 L0 60 Z" fill="white"/>
+        <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
+          <path d="M0 35 C360 70 720 0 1080 35 C1260 52 1380 44 1440 35 L1440 70 L0 70 Z" fill="white"/>
         </svg>
       </div>
     </section>
