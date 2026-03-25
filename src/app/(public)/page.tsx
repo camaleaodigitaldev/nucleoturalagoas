@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { HeroBanner } from "@/components/home/HeroBanner"
 import { InstitutionalBlock } from "@/components/home/InstitutionalBlock"
 import { CategoryGrid } from "@/components/home/CategoryGrid"
-import { FeaturedPartners } from "@/components/home/FeaturedPartners"
+import { PartnersMarquee } from "@/components/home/PartnersMarquee"
 import { LatestNews } from "@/components/home/LatestNews"
 import { UpcomingEvents } from "@/components/home/UpcomingEvents"
 import { CTABlock } from "@/components/home/CTABlock"
@@ -31,7 +31,7 @@ export default async function HomePage() {
       "home_cta_text",
     ]),
     getCategories(),
-    getFeaturedAssociados(6),
+    getFeaturedAssociados(18),
     getLatestNoticias(3),
     getUpcomingEventos(4),
   ])
@@ -44,7 +44,7 @@ export default async function HomePage() {
         text={content["home_institucional_text"]?.value_text ?? "O NúcleoTur Alagoas reúne as melhores empresas e profissionais do setor turístico alagoano."}
       />
       <CategoryGrid categories={categories} />
-      <FeaturedPartners associados={featured} />
+      <PartnersMarquee associados={featured} />
       <LatestNews noticias={noticias} />
       <UpcomingEvents eventos={eventos} />
       <CTABlock

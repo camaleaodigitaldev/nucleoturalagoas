@@ -30,36 +30,22 @@ export function Header() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         transparent
           ? "bg-transparent"
-          : "bg-white/97 backdrop-blur-md border-b border-gray-100 shadow-[0_1px_4px_rgba(0,0,0,0.07)]"
+          : "bg-white/97 backdrop-blur-md border-b border-gray-100 shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
       )}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-[4.5rem]">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+          {/* Logo — imagem apenas */}
+          <Link href="/" className="shrink-0 flex items-center">
             <Image
               src="/logo.jpg"
               alt="NúcleoTur Alagoas"
-              width={40}
-              height={40}
-              className="rounded-lg object-cover"
+              width={46}
+              height={46}
+              className="rounded-xl object-cover"
               priority
             />
-            <div className="flex flex-col leading-none gap-0.5">
-              <span className={cn(
-                "font-display font-bold text-[1.05rem] tracking-tight leading-none transition-colors duration-300",
-                transparent ? "text-white" : "text-gray-900"
-              )}>
-                Núcleo<span className="text-secondary-500">Tur</span>
-              </span>
-              <span className={cn(
-                "text-[0.58rem] font-semibold tracking-[0.15em] uppercase leading-none transition-colors duration-300",
-                transparent ? "text-white/50" : "text-primary-600"
-              )}>
-                Alagoas
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -75,7 +61,7 @@ export function Header() {
                       ? "text-white bg-white/15"
                       : "text-primary-700 bg-primary-50"
                     : transparent
-                    ? "text-white/80 hover:text-white hover:bg-white/10"
+                    ? "text-white/75 hover:text-white hover:bg-white/10"
                     : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                 )}
               >
@@ -89,7 +75,7 @@ export function Header() {
             <Button
               asChild
               size="sm"
-              className="hidden lg:inline-flex text-[0.8125rem] font-semibold bg-secondary-500 hover:bg-secondary-600 text-white shadow-none"
+              className="hidden lg:inline-flex text-[0.8125rem] font-semibold bg-secondary-500 hover:bg-secondary-400 text-white shadow-none"
             >
               <Link href="/seja-associado">Seja Associado</Link>
             </Button>
@@ -110,16 +96,12 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] p-0 bg-white">
                 <SheetHeader className="px-6 pt-6 pb-4 border-b border-gray-100">
-                  <SheetTitle className="flex items-center gap-2.5 font-display font-bold text-[0.95rem] text-gray-900">
-                    <Image
-                      src="/logo.jpg"
-                      alt="NúcleoTur Alagoas"
-                      width={32}
-                      height={32}
-                      className="rounded-md object-cover"
-                    />
-                    Núcleo<span className="text-secondary-500">Tur</span>
-                    <span className="text-[0.65rem] font-semibold text-primary-600 tracking-wider uppercase">Alagoas</span>
+                  <SheetTitle className="flex items-center gap-2.5">
+                    <Image src="/logo.jpg" alt="NúcleoTur Alagoas" width={34} height={34} className="rounded-lg object-cover" />
+                    <span className="font-display font-bold text-[0.95rem] text-gray-900">
+                      Núcleo<span className="text-secondary-500">Tur</span>{" "}
+                      <span className="text-primary-600">Alagoas</span>
+                    </span>
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col px-3 py-4 gap-0.5">
@@ -140,13 +122,8 @@ export function Header() {
                   ))}
                 </nav>
                 <div className="px-4 pb-6">
-                  <Button
-                    asChild
-                    className="w-full bg-secondary-500 hover:bg-secondary-600 text-white font-semibold"
-                  >
-                    <Link href="/seja-associado" onClick={() => setOpen(false)}>
-                      Seja Associado
-                    </Link>
+                  <Button asChild className="w-full bg-secondary-500 hover:bg-secondary-400 text-white font-semibold">
+                    <Link href="/seja-associado" onClick={() => setOpen(false)}>Seja Associado</Link>
                   </Button>
                 </div>
               </SheetContent>
