@@ -68,7 +68,7 @@ export function PartnersMarquee({ associados }: PartnersMarqueeProps) {
   }
 
   return (
-    <section className="py-20 lg:py-24 bg-white overflow-hidden">
+    <section className="py-20 lg:py-24 overflow-hidden" style={{ background: "linear-gradient(180deg, #F0F8FF 0%, #EBF5FF 100%)" }}>
       <style>{`
         @keyframes marquee-scroll {
           0%   { transform: translateX(0); }

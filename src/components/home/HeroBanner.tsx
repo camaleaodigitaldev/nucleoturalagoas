@@ -18,15 +18,14 @@ const stats = [
 
 function YoutubeEmbed({ videoId }: { videoId: string }) {
   if (!videoId) {
-    // placeholder enquanto o vídeo não está configurado
     return (
-      <div className="w-full aspect-video rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-        <p className="text-white/30 text-sm">Vídeo em breve</p>
+      <div className="w-full aspect-video rounded-2xl bg-primary-50 border-2 border-primary-100 flex items-center justify-center">
+        <p className="text-primary-300 text-sm">Vídeo em breve</p>
       </div>
     )
   }
   return (
-    <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
+    <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-xl shadow-primary-900/10 ring-1 ring-primary-100">
       <iframe
         src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0`}
         title="NúcleoTur Alagoas"
@@ -42,54 +41,54 @@ function HeroFallback() {
   return (
     <section
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ background: "linear-gradient(145deg, #071E4A 0%, #0D2E6E 55%, #0A2356 100%)" }}
+      style={{
+        background: "linear-gradient(160deg, #EBF5FF 0%, #F5F9FF 45%, #FFFDF7 100%)",
+      }}
     >
-      {/* Dot grid */}
+      {/* Decoração: círculo azul grande desfocado no canto superior direito */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: "radial-gradient(circle, #93C5FD 1px, transparent 1px)",
-          backgroundSize: "36px 36px",
-        }}
+        className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #BFDBFE 0%, transparent 70%)" }}
+      />
+      {/* Círculo creme quente no canto inferior esquerdo */}
+      <div
+        className="absolute bottom-0 left-0 w-[500px] h-[400px] rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #FEF3C7 0%, transparent 70%)" }}
       />
 
-      {/* Glows */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-primary-400/10 blur-[120px] translate-x-1/4 -translate-y-1/4 pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] rounded-full bg-teal-500/8 blur-[90px] pointer-events-none" />
-
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-28 pb-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
 
-          {/* Left: texto */}
+          {/* Esquerda: texto */}
           <div>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="h-px w-8 bg-teal-400/70" />
-              <span className="text-teal-300 text-xs font-semibold tracking-[0.18em] uppercase">
+            <div className="flex items-center gap-3 mb-7">
+              <div className="h-px w-7 bg-primary-400" />
+              <span className="text-primary-500 text-xs font-semibold tracking-[0.16em] uppercase">
                 Portal do Turismo Alagoano
               </span>
             </div>
 
-            <h1 className="font-display font-bold text-white leading-[1.05] mb-6">
-              <span className="block text-5xl sm:text-6xl lg:text-6xl xl:text-[5rem] tracking-tight">
+            <h1 className="font-display font-bold leading-[1.05] mb-6">
+              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-gray-900">
                 Conectando
               </span>
-              <span className="block text-5xl sm:text-6xl lg:text-6xl xl:text-[5rem] tracking-tight text-primary-300">
+              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-primary-600">
                 o turismo
               </span>
-              <span className="block text-5xl sm:text-6xl lg:text-6xl xl:text-[5rem] tracking-tight">
+              <span className="block text-5xl sm:text-6xl xl:text-[5.25rem] tracking-tight text-gray-900">
                 alagoano
               </span>
             </h1>
 
-            <p className="text-white/50 text-lg leading-relaxed mb-10 max-w-md">
-              O NúcleoTur Alagoas reúne as melhores empresas e profissionais do setor turístico do estado em um único portal.
+            <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-[420px]">
+              Reunimos as melhores empresas e profissionais do turismo de Alagoas em um único portal.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-14">
               <Button
                 size="lg"
                 asChild
-                className="bg-secondary-500 hover:bg-secondary-400 text-white font-semibold shadow-none text-sm"
+                className="bg-primary-600 hover:bg-primary-700 text-white font-semibold shadow-lg shadow-primary-200 text-sm"
               >
                 <Link href="/associados">
                   Conheça os Associados
@@ -98,44 +97,42 @@ function HeroFallback() {
               </Button>
               <Button
                 size="lg"
-                variant="ghost"
+                variant="outline"
                 asChild
-                className="border border-white/15 text-white/65 hover:text-white hover:bg-white/8 text-sm"
+                className="border-primary-200 text-primary-700 hover:bg-primary-50 text-sm"
               >
                 <Link href="/seja-associado">Seja Associado</Link>
               </Button>
             </div>
 
+            {/* Stats */}
             <div className="flex items-center gap-8">
               {stats.map((s, i) => (
                 <div key={s.label} className="flex items-center gap-8">
                   <div>
-                    <p className="font-display font-bold text-2xl text-white">{s.value}</p>
-                    <p className="text-white/30 text-xs tracking-wide mt-0.5">{s.label}</p>
+                    <p className="font-display font-bold text-2xl text-primary-600">{s.value}</p>
+                    <p className="text-gray-400 text-xs tracking-wide mt-0.5">{s.label}</p>
                   </div>
-                  {i < stats.length - 1 && <div className="h-8 w-px bg-white/10" />}
+                  {i < stats.length - 1 && (
+                    <div className="h-8 w-px bg-gray-200" />
+                  )}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right: vídeo YouTube */}
+          {/* Direita: vídeo */}
           <div className="hidden lg:block">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-3xl bg-primary-500/10 blur-2xl" />
-              <div className="relative">
-                <YoutubeEmbed videoId={HERO_YOUTUBE_ID} />
-              </div>
-            </div>
+            <YoutubeEmbed videoId={HERO_YOUTUBE_ID} />
           </div>
 
         </div>
       </div>
 
-      {/* Wave de transição */}
+      {/* Linha de onda teal na base (referência marca) */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
-          <path d="M0 45 C360 90 720 0 1080 45 C1260 68 1380 55 1440 45 L1440 90 L0 90 Z" fill="white"/>
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
+          <path d="M0 30 C360 60 720 0 1080 30 C1260 45 1380 38 1440 30 L1440 60 L0 60 Z" fill="white"/>
         </svg>
       </div>
     </section>
@@ -163,22 +160,22 @@ export function HeroBanner({ banners }: HeroBannerProps) {
           {banners.map((banner) => (
             <div key={banner.id} className="relative flex-[0_0_100%] h-full">
               <Image src={banner.image_url} alt={banner.title ?? "Banner NúcleoTur"} fill className="object-cover" priority sizes="100vw" />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(7,30,74,0.88) 0%, rgba(7,30,74,0.50) 55%, transparent 100%)" }} />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
               <div className="absolute inset-0 flex items-center">
                 <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
-                  <div className="max-w-2xl text-white">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="h-px w-8 bg-teal-400/70" />
-                      <span className="text-teal-300 text-xs font-semibold tracking-[0.18em] uppercase">NúcleoTur Alagoas</span>
+                  <div className="max-w-xl">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="h-px w-7 bg-primary-500" />
+                      <span className="text-primary-600 text-xs font-semibold tracking-[0.16em] uppercase">NúcleoTur Alagoas</span>
                     </div>
                     {banner.title && (
-                      <h1 className="font-display font-bold text-4xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight mb-4">{banner.title}</h1>
+                      <h1 className="font-display font-bold text-4xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight text-gray-900 mb-4">{banner.title}</h1>
                     )}
                     {banner.subtitle && (
-                      <p className="text-white/60 text-lg leading-relaxed mb-8">{banner.subtitle}</p>
+                      <p className="text-gray-600 text-lg leading-relaxed mb-8">{banner.subtitle}</p>
                     )}
                     {banner.cta_text && banner.cta_url && (
-                      <Button size="lg" asChild className="bg-secondary-500 hover:bg-secondary-400 text-white font-semibold shadow-none">
+                      <Button size="lg" asChild className="bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-200 font-semibold">
                         <Link href={banner.cta_url}>{banner.cta_text}<ArrowRight className="size-4 ml-2" /></Link>
                       </Button>
                     )}
@@ -192,20 +189,14 @@ export function HeroBanner({ banners }: HeroBannerProps) {
 
       {banners.length > 1 && (
         <>
-          <button onClick={scrollPrev} className="absolute left-5 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors backdrop-blur-sm">
+          <button onClick={scrollPrev} className="absolute left-5 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full bg-white/80 text-gray-700 hover:bg-white shadow-md transition-all backdrop-blur-sm">
             <ChevronLeft className="size-5" />
           </button>
-          <button onClick={scrollNext} className="absolute right-5 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors backdrop-blur-sm">
+          <button onClick={scrollNext} className="absolute right-5 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full bg-white/80 text-gray-700 hover:bg-white shadow-md transition-all backdrop-blur-sm">
             <ChevronRight className="size-5" />
           </button>
         </>
       )}
-
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
-          <path d="M0 45 C360 90 720 0 1080 45 C1260 68 1380 55 1440 45 L1440 90 L0 90 Z" fill="white"/>
-        </svg>
-      </div>
     </section>
   )
 }

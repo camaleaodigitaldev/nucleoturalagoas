@@ -27,8 +27,8 @@ export async function Footer() {
     content?.value_text ?? "Núcleo de empresas e profissionais do turismo de Alagoas."
 
   return (
-    <footer className="bg-[#050E1A] text-white/40">
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-primary-600/50 to-transparent" />
+    <footer className="bg-[#0D2152] text-white/40">
+      <div className="h-[3px] bg-gradient-to-r from-transparent via-primary-400/60 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">

@@ -15,7 +15,7 @@ const stats = [
 
 export function InstitutionalBlock({ title, text }: InstitutionalBlockProps) {
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <section className="py-20 lg:py-28" style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F0F8FF 100%)" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
         {/* Top: title + text */}
@@ -43,7 +43,7 @@ export function InstitutionalBlock({ title, text }: InstitutionalBlockProps) {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border border-gray-100 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 bg-white border border-primary-100 rounded-2xl overflow-hidden shadow-sm shadow-primary-50">
           {stats.map((s, i) => (
             <div
               key={s.label}

@@ -20,7 +20,7 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
   if (categories.length === 0) return null
 
   return (
-    <section className="py-20 lg:py-24 bg-gray-50">
+    <section className="py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
