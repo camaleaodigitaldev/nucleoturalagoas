@@ -1,21 +1,21 @@
 "use client"
 
 import { useMemo } from "react"
-import { CalendarDays, Users } from "lucide-react"
+import { CalendarDays } from "lucide-react"
 
 const MEETINGS_2026 = [
-  { month: "Janeiro",   abbr: "JAN", num: 1,  meeting: "30/01", diretoria: 14 },
-  { month: "Fevereiro", abbr: "FEV", num: 2,  meeting: "11/02", diretoria: 13 },
-  { month: "Março",     abbr: "MAR", num: 3,  meeting: "11/03", diretoria: 19 },
-  { month: "Abril",     abbr: "ABR", num: 4,  meeting: "08/04", diretoria: 22 },
-  { month: "Maio",      abbr: "MAI", num: 5,  meeting: "13/05", diretoria: 27 },
-  { month: "Junho",     abbr: "JUN", num: 6,  meeting: "10/06", diretoria: 17 },
-  { month: "Julho",     abbr: "JUL", num: 7,  meeting: "08/07", diretoria: 22 },
-  { month: "Agosto",    abbr: "AGO", num: 8,  meeting: "12/08", diretoria: 26 },
-  { month: "Setembro",  abbr: "SET", num: 9,  meeting: "09/09", diretoria: 23 },
-  { month: "Outubro",   abbr: "OUT", num: 10, meeting: "14/10", diretoria: 28 },
-  { month: "Novembro",  abbr: "NOV", num: 11, meeting: "11/11", diretoria: 25 },
-  { month: "Dezembro",  abbr: "DEZ", num: 12, meeting: "09/12", diretoria: null },
+  { month: "Janeiro",   abbr: "JAN", num: 1,  meeting: "30/01" },
+  { month: "Fevereiro", abbr: "FEV", num: 2,  meeting: "11/02" },
+  { month: "Março",     abbr: "MAR", num: 3,  meeting: "11/03" },
+  { month: "Abril",     abbr: "ABR", num: 4,  meeting: "08/04" },
+  { month: "Maio",      abbr: "MAI", num: 5,  meeting: "13/05" },
+  { month: "Junho",     abbr: "JUN", num: 6,  meeting: "10/06" },
+  { month: "Julho",     abbr: "JUL", num: 7,  meeting: "08/07" },
+  { month: "Agosto",    abbr: "AGO", num: 8,  meeting: "12/08" },
+  { month: "Setembro",  abbr: "SET", num: 9,  meeting: "09/09" },
+  { month: "Outubro",   abbr: "OUT", num: 10, meeting: "14/10" },
+  { month: "Novembro",  abbr: "NOV", num: 11, meeting: "11/11" },
+  { month: "Dezembro",  abbr: "DEZ", num: 12, meeting: "09/12" },
 ]
 
 export function MeetingsCalendar() {
@@ -56,10 +56,6 @@ export function MeetingsCalendar() {
           <div className="flex items-center gap-2">
             <CalendarDays className="size-4 text-primary-600" />
             <span className="text-xs text-gray-500 font-medium">Encontro Geral</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="size-4 text-secondary-500" />
-            <span className="text-xs text-gray-500 font-medium">Reunião de Diretoria</span>
           </div>
           {nextMeetingMonth && (
             <div className="flex items-center gap-2 ml-auto">
@@ -140,26 +136,6 @@ export function MeetingsCalendar() {
                     {m.meeting}
                   </span>
                 </div>
-
-                {/* Diretoria */}
-                {m.diretoria && (
-                  <div className="flex items-center gap-2">
-                    <Users
-                      className={[
-                        "size-3.5 shrink-0",
-                        isNext ? "text-secondary-300" : "text-secondary-500",
-                      ].join(" ")}
-                    />
-                    <span
-                      className={[
-                        "text-xs font-medium",
-                        isNext ? "text-white/60" : isPast ? "text-gray-300" : "text-gray-400",
-                      ].join(" ")}
-                    >
-                      Diretoria — dia {m.diretoria}
-                    </span>
-                  </div>
-                )}
 
                 {/* Linha inferior colorida no card normal */}
                 {!isNext && !isPast && (

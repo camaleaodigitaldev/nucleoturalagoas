@@ -88,7 +88,7 @@ function HeroFallback() {
               </span>
             </h1>
 
-            <p className="text-white/70 text-xl font-medium leading-relaxed mb-10 max-w-[420px] tracking-wide">
+            <p className="text-white/70 text-xl font-medium mb-10 tracking-wide whitespace-nowrap">
               Conectando agentes, fortalecendo destinos.
             </p>
 
